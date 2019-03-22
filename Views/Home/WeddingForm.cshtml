@@ -1,0 +1,61 @@
+@model Wedding
+
+<h1>Create An Activity!</h1>
+
+<form asp-action="AddWedding" asp-controller="Home" method="POST">
+    <!-- GROOM : text field-->
+    <div class="form-group">
+        <span class="text-danger" asp-validation-for="Groom"></span>
+        <br>
+        <label asp-for="Groom">Activity Name:</label><br>
+        <input asp-for="Groom">
+    </div>
+        <!-- DATE : date field-->
+    <div class="form-group">
+        <span class="text-danger" asp-validation-for="Date"></span>
+        <br>
+        <label asp-for="Date">Date:</label><br>
+        <input asp-for="Date" type="date">
+    </div>
+            <!-- TIME : date field-->
+    <div class="form-group">
+        <span class="text-danger" asp-validation-for="time"></span>
+        <br>
+        <label asp-for="time">time:</label><br>
+        <input asp-for="time" type="time">
+    </div>
+    <!-- DURATION : drop-down field-->
+    <div class="form-group">
+        <span class="text-danger" asp-validation-for="duration"></span>
+        <br>
+        <label asp-for="duration">Duration:</label><br>
+        <input class="form-control" type="number" name="duration" placeholder="1">
+        <select class="form-control" name="durationunit">
+                    <option value="Days">Days</option>
+                    <option value="Hours">Hours</option>
+                    <option value="Minutes">Minutes</option>
+                </select>
+    </div>
+    <!-- BRIDE : text field-->
+    <div class="form-group">
+        <span class="text-danger" asp-validation-for="Bride"></span>
+        <br>
+        <label asp-for="Bride">Event Coordinator:</label><br>
+        <input asp-for="Bride">
+    </div>
+
+    <!-- ADDRESS : text field-->
+    <div class="form-group">
+        <span class="text-danger" asp-validation-for="Address"></span>
+        <br>
+        <label asp-for="Address">Decription:</label><br>
+        <textarea asp-for="Address"></textarea>
+    </div>
+
+    <input type="hidden" name="UserId" value="@ViewBag.user">
+
+    <input value="Create Activity" type="submit">
+</form>
+
+
+

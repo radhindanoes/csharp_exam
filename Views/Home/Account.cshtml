@@ -1,0 +1,86 @@
+@using Microsoft.AspNetCore.Http;
+
+<h1>Welcome @Context.Session.GetString("userInSession_firstname") @Context.Session.GetString("userInSession_lastname")
+    To Dojo Activity Center!
+</h1>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<p align="right"><button><a href="/logout">logout</a></button></p>
+
+<!-- dont Forget to add in the route for the href! -->
+
+<table>
+    <tr>
+        <th>Activity Name</th>
+        <th>Date And Time</th>
+        <th>Duration</th>
+        <th>Event Coordinator</th>
+        <th>Number Of Participants</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach(var wed in ViewBag.listOfWeddings)
+    {
+
+    <tr>
+        <td><a href="/wedding/@wed.WeddingId">@wed.Groom</a></td>
+        <td>@wed.Date.ToString("MM/dd/yyyy") at @wed.time.ToString("HH:mm tt")</td>
+        
+        <td>@wed.duration @wed.durationunit</td>
+        <td>@wed.Bride</td>
+        <td>@wed.listOfGuests.Count</td>
+        <td>
+            @if(wed.UserId == ViewBag.id)
+                {
+                <a href="/delete/@wed.WeddingId">Delete</a>
+                }
+
+            @if(wed.listOfGuests.Count == 0)
+                {
+                <a href="/rsvp/@wed.WeddingId/@ViewBag.id">Join</a>
+                }
+
+            @if(wed.listOfGuests.Count > 0)
+            {
+                bool rsvp = false;
+                int wedding = 0;
+
+                @foreach(var guest in wed.listOfGuests)
+                {
+                @if(guest.User.UserId == ViewBag.id)
+                    {
+                    rsvp = true;
+                    wedding = guest.RSVPId;
+                    }
+                }
+            @if(rsvp == true)
+                {
+                <a href="/cancel/@wedding">Leave</a>
+                }
+            @if(rsvp == false)
+                {
+                <a href="/rsvp/@wed.WeddingId/@ViewBag.id">Join</a>
+                }
+            }
+        </td>
+    </tr>
+    }
+</table>
+<p align="right"><button><a href="/weddingform">Add an Activity</a></button></p>

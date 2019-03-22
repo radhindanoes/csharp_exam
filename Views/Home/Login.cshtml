@@ -1,0 +1,17 @@
+@model LoginUser
+<h1 align="center">Welcome To The Dojo Activity Center</h1>
+
+<p align="right"><a href="/">register</a></p>
+
+<form asp-action="loginVerification" asp-controller="Home" method="POST">
+    <span asp-validation-for="Email"></span><br>
+    <label asp-for="Email"></label><br>
+    <input asp-for="Email">
+    <br>
+
+    <span asp-validation-for="Password"></span><br>
+    <label asp-for="Password"></label><br>
+    <input asp-for="Password" type="password">
+    <br>
+    <input type="submit" value="Login Now">
+</form>

@@ -1,0 +1,41 @@
+<h1>Activity Name: @ViewBag.wedding.Groom</h1>
+
+<p align="right"><button><a href="/account/@ViewBag.User.UserId">Dashboard</a></button></p>
+
+<p>Event Coordinator: @ViewBag.wedding.Bride</p>
+<p>Description: @ViewBag.wedding.Address</p>
+<h3>List of Participants:</h3>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<table>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    @foreach(var guest in ViewBag.wedding.listOfGuests)
+    {
+    <tr>
+        <td>@guest.User.FirstName</td>
+        <td>@guest.User.LastName</td>
+    </tr>
+    }
+</table>
+
+<p align="right"><button><a href="/logout">Logout</a></button></p>
